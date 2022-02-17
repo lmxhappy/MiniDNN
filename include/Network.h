@@ -13,7 +13,7 @@
 #include "Utils/Random.h"
 #include "Utils/IO.h"
 #include "Utils/Factory.h"
-
+using namespace std;
 namespace MiniDNN
 {
 
@@ -49,7 +49,7 @@ class Network
         void check_unit_sizes() const
         {
             const int nlayer = num_layers();
-
+            cout  << "nlayer: " << nlayer<<endl;
             if (nlayer <= 1)
             {
                 return;
@@ -59,6 +59,7 @@ class Network
             {
                 if (m_layers[i]->in_size() != m_layers[i - 1]->out_size())
                 {
+                    cout << i << endl;
                     throw std::invalid_argument("[class Network]: Unit sizes do not match");
                 }
             }
@@ -77,6 +78,7 @@ class Network
             // First layer
             if (input.rows() != m_layers[0]->in_size())
             {
+                cout << "input.rows:" << input.rows() << ", m_layers[0] unit:" << m_layers[0]->in_size();
                 throw std::invalid_argument("[class Network]: Input data have incorrect dimension");
             }
 
@@ -496,6 +498,7 @@ class Network
 
             if (nlayer <= 0)
             {
+                cout <<"nlayer <= 0"<<endl;
                 return Matrix();
             }
 
